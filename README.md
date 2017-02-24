@@ -47,4 +47,16 @@ Class 21 has a ratio of 1.75, which means that its size in the validation is alm
 <br>
 Next, let's have a quick look at an image from each class, just to start getting familiar with the images themselves.
 ![](class_signs.png)
-We see here several very dark images, some blurry images.  Images are mostly centered, and mostly occupy the same amount of area within each image.  Backgrounds vary, but are mostly yellowish-brownish.<br>
+<br>
+We see here several very dark images, some blurry images.  Images are mostly centered, and mostly occupy the same amount of area within each image.  Images are mostly upright, but there are a few with a bit of rotation.  Backgrounds vary, but are mostly yellowish-brownish.<br>
+<br>
+Now I want to dig deeper into one of the classes.  Class 0 is small and might need augmenting, so let's look at it.
+![](class_0_training.png)
+<br>
+Wow!
+Next we look at class 0 images from the validation dataset.  
+![](class_0_validation.png)
+<br>
+Another wow!  These images look almost all the same.<br>
+I don't have much experience, but this kind of repetetivity seems problematic since its mostly testing for a small number of features.
+<br>
