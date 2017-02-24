@@ -33,4 +33,10 @@ Number of testing examples = 12630
 Image data shape = (32, 32, 3)
 Number of classes = 43
 ```
-
+Distribution of the training samples:
+![](training_distribution.png)
+It is evident that the classes do not have equal distribution within the training dataset.  Because there are 43 classes, had the samples been distributed equally, we would have 2.33% (100/43) of the samples in each class.  However, in the actual dataset distribution, most classes comprise less than 2%.  Class 2 has the largest number of samples (5.78%), and classes 0 and 19 have the lowest representation (0.52%).<br>
+The validation dataset also doesn't distribute the samples between the classes in an equal manner:
+![](validation_distribution.png)
+It is also interesting to look at how well the validation dataset represents the training set.  The graph below shows that 
+![](train_valid_per_class.png)
