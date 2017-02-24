@@ -3,7 +3,7 @@ This is a German traffic signs classifier written in TensorFlow, which I created
 
 ##The goals / steps of this project are the following:
 
-* Load the data set (see below for links to the project data set)
+* Load the data set 
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
@@ -33,11 +33,18 @@ Number of testing examples = 12630
 Image data shape = (32, 32, 3)
 Number of classes = 43
 ```
+
+### Explore, summarize and visualize the data set
 Distribution of the training samples:
 ![](training_distribution.png)
 It is evident that the classes do not have equal distribution within the training dataset.  Because there are 43 classes, had the samples been distributed equally, we would have 2.33% (100/43) of the samples in each class.  However, in the actual dataset distribution, most classes comprise less than 2%.  Class 2 has the largest number of samples (5.78%), and classes 0 and 19 have the lowest representation (0.52%).<br>
 The validation dataset also doesn't distribute the samples between the classes in an equal manner:
 ![](validation_distribution.png)
 It is also interesting to look at how well the validation dataset represents the training set.  In the following table and graph, a ratio close to 1 indicates that there about the same fraction of validation samples as training samples, in the specific class.
-A high ratio means that the class has a larger represnetation in the validation dataset.
+A high ratio means that the class has a larger represnetation in the validation dataset.<br>
+Class 21 has a ratio of 1.75, which means that its size in the validation is almost twice its size in the training set.  Incidentaly, class 21 also has a low representation in the training dataset.  These two factors together, would make it likely that class 21 will have many errors in the validation testing.
 ![](valid_train_per_class.png)
+<br>
+Next, let's have a quick look at an image from each class, just to start getting familiar with the images themselves.
+![](class_signs.png)
+We see here several very dark images, some blurry images.  Images are mostly centered, and mostly occupy the same amount of area within each image.  Backgrounds vary, but are mostly yellowish-brownish.<br>
