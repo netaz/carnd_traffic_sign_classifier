@@ -57,6 +57,11 @@ Wow!
 Next we look at class 0 images from the validation dataset.  
 ![](class_0_validation.png)
 <br>
-Another wow!  These images look almost all the same.<br>
-I don't have much experience, but this kind of repetetivity seems problematic since its mostly testing for a small number of features.
+Another wow!  These images look almost all the same - it's as if they were taken from the window of a slow moving car.<br>
+I don't have much experience, but this kind of repetitivity seems problematic since its mostly testing for a small number of features, because these images are highly corrolated.
 <br>
+I also examined class 19, since it is also very small (180 training samples).  It exhibited similar chracteristics, but the training set has almost 30 very dark images (~15% of the images).  
+![](class_19_training.png)
+<br>
+Even when I look at these closer (larger) they look extremely dark.
+![](class_19_training_dark_closeup.png)
