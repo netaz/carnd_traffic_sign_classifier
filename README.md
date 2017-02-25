@@ -65,3 +65,8 @@ I also examined class 19, since it is also very small (180 training samples).  I
 <br>
 Even when I look at these closer (larger) they look extremely dark.
 ![](class_19_training_dark_closeup.png)
+<br>
+I converted them to grayscale, and look at the improvement!  Now grayscale is defintiley going to be part of the preprocessing I will do.
+<br>
+![](class_19_training_dark_grayscale.png)
+<br>
