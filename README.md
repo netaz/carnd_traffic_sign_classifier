@@ -3,8 +3,8 @@ This is a German traffic signs classifier written in TensorFlow, which I created
 
 ##The goals / steps of this project are the following:
 
-* Load the data set 
-* Explore, summarize and visualize the data set
+* Loading the dataset
+* Dataset summary, exploration and visualization
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
 * Analyze the softmax probabilities of the new images
@@ -33,8 +33,7 @@ Number of testing examples = 12630
 Image data shape = (32, 32, 3)
 Number of classes = 43
 ```
-
-### Explore, summarize and visualize the data set
+### Dataset summary, exploration and visualization
 Distribution of the training samples:
 ![](training_distribution.png)
 It is evident that the classes do not have equal distribution within the training dataset.  Because there are 43 classes, had the samples been distributed equally, we would have 2.33% (100/43) of the samples in each class.  However, in the actual dataset distribution, most classes comprise less than 2%.  Class 2 has the largest number of samples (5.78%), and classes 0 and 19 have the lowest representation (0.52%).<br>
@@ -66,7 +65,7 @@ I also examined class 19, since it is also very small (180 training samples).  I
 Even when I look at these closer (larger) they look extremely dark.
 ![](class_19_training_dark_closeup.png)
 <br>
-I converted them to grayscale, and look at the improvement!  Now grayscale is defintiley going to be part of the preprocessing I will do.
+I converted them to grayscale, and look at the improvement!  Grayscale is just a dot product of [R,G,B] and [0.299, 0.587, 0.114], so I imagine this "feature" can be learned by the netowrk, but I will defintiley make it part of the dataset preprocessing.  It should save some time spent on the first convolution.
 <br>
 ![](class_19_training_dark_grayscale.png)
 <br>
