@@ -46,28 +46,29 @@ The validation dataset also doesn't distribute the samples between the classes i
 It is interesting to look at how well the validation dataset represents the training set, and that's the reason I plotted the distributions of the training and validation set in the same plot.  Looking at the plot we see q large resemblence in the distributions of the two sets, but I wanted to make sure this is the case.  I divided the percent representation of each class in the training set, by its representation in the validation set and called this the "ratio"  A ratio close to 1 indicates that there about the same fraction of validation samples as training samples, in the specific class.  In the iPython notebook I print the "ratio" value for each class, but here it sufficient to note that the median=1.03  and mean=0.94.  Although the two datasets distribute similarly enough, the plot below shows that there are enough outliers to raise my curiousity if the classes that have low/high ratio will show poor validation accuracy.  We shall see.<br>
 ![](valid_train_per_class.png)
 <br>
-Next, let's have a quick look at an image from each class, just to start getting familiar with the images themselves.
+Next, let's have a quick look at an image from each class, just to start getting familiar with the images themselves.<br>
 ![](class_signs.png)
 <br>
 We see here several very dark images, some blurry images.  Images are mostly centered, and mostly occupy the same amount of area within each image.  Images are mostly upright, but there are a few with a bit of rotation.  Backgrounds vary, but are mostly yellowish-brownish.<br>
 <br>
-Now I want to dig deeper into one of the classes.  Class 0 is small and might need augmenting, so let's look at it.
+Now I want to dig deeper into one of the classes.  It is important to spend time reviewing the finer details of the images and watch for different qualities and characteristics they may have.  This will help in deciding what augmentations may help during the training of the model.<br>
+Class 0 is small and might need augmenting, so let's look at it.
 ![](class_0_training.png)
 <br>
-Wow!
+This is a bit surprising: I expected more variance, but it looks like there's a small set of signs that appear multiple times with some differences.  Not exactly what I was expecting.
 Next we look at class 0 images from the validation dataset.  
 ![](class_0_validation.png)
 <br>
-Another wow!  These images look almost all the same - it's as if they were taken from the window of a slow moving car.<br>
-I don't have much experience, but this kind of repetitivity seems problematic since its mostly testing for a small number of features, because these images are highly corrolated.
+Another surprise!  These images look almost all the same - it's as if they were taken from the window of a slow moving car.<br>
+I don't have much experience, but this kind of repetitivity seems problematic since its mostly testing for a small number of features, because these images are highly corrolated.  On the other hand, I suppose that in a real driving scenario, this is exaclty what we would expect to see: the same sign with some small variance due to the car movement.
 <br>
-I also examined class 19, since it is also very small (180 training samples).  It exhibited similar chracteristics, but the training set has almost 30 very dark images (~15% of the images).  
+I also examined class 19, since it is also small enough to display (180 training samples).  It exhibited similar chracteristics, but the training set has almost 30 very dark images (~15% of the images).  
 ![](class_19_training.png)
 <br>
 Even when I look at these closer (larger) they look extremely dark.
 ![](class_19_training_dark_closeup.png)
 <br>
-I converted them to grayscale, and look at the improvement!  Grayscale is just a dot product of [R,G,B] and [0.299, 0.587, 0.114], so I imagine this "feature" can be learned by the netowrk, but I will defintiley make it part of the dataset preprocessing.  It should save some time spent on the first convolution.
+I converted them to grayscale, and look at the improvement!  Grayscale is just a dot product of [R,G,B] and [0.299, 0.587, 0.114], so I imagine this "feature" can be learned by the network.  I.e. the network can learn to exract the luminance feature if it determines it is important enough.  If in the pre-processing phase I will convert the dataset images to grayscale, I will bascially make the decision that the chroma channels are not important and that the luminance data is sufficient to represent the inputs.  These dark images give me confidence that there's a lot of information in the luminance data.
 <br>
 ![](class_19_training_dark_grayscale.png)
 <br>
@@ -75,5 +76,5 @@ I converted them to grayscale, and look at the improvement!  Grayscale is just a
 The code for preprocessing the image datasets is in the iPython cell which has "Preprocessing utilities" as the first remark.<br>
 I first convert the RGB images to grayscale.  There's little color information in the images, and I think that the structure of the signs is enough. Yann LeCun reported in his paper that this helped increase the predcition accuracy by a small bit, while decreasing the complexity of the model (we only have to deal with one third of the input features).<br>
 Next, I perform [min-max scaling](http://sebastianraschka.com/Articles/2014_about_feature_scaling.html#about-min-max-scaling) (also known as scale normalization) to rescale the pixels to the 0-1 floating-point range.  It is common practice to do this in cases where the input features have different scales, but in 8-bit integer grayscale images the pixels are already within the same value range (0-255), so it would seem unnecessary to do this rescaling.  Finally, I standardized the data using [Z-score normalization](http://lamda.nju.edu.cn/weixs/project/CNNTricks/CNNTricks.html) which centers (mean=0) and normalizes (std=1) all of the images.<br>
-Finally, as a sanity check, I choose a few random images from the pre-processed image set and display them:
-
+As a sanity check, I choose a few random images from the pre-processed image set and display them:<br>
+![](class_19_training_preprocessing_.png)
