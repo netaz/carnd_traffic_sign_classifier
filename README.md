@@ -73,3 +73,7 @@ I converted them to grayscale, and look at the improvement!  Grayscale is just a
 <br>
 ![](class_19_training_dark_grayscale.png)
 <br>
+###Design, train and test a model architecture
+The code for preprocessing the image datasets is in the iPython cell which has "Preprocessing utilities" as the first remark.<br>
+I first convert to the RGB images to grayscale.  There's little color information in the images, and I think that the structure of the signs is enough. Yann LeCun reported in his paper that this helped increase the predcition accuracy by a small bit, while decreasing the complexity of the model (one third of the inputs).<br>
+Next, I performed [min-max scaling](http://sebastianraschka.com/Articles/2014_about_feature_scaling.html#about-min-max-scaling) (also known as scale normalization) to rescale the pixels to the 0-1 floating-point range.  It is common practice to do this in cases where the features have different scales, but in 8-bit integer grayscale images the pixels are already within the same value range (0-255), so it would seem unnecessary to do this.  Finally, I standardized the data using [Z-score normalization](http://lamda.nju.edu.cn/weixs/project/CNNTricks/CNNTricks.html) which centers (mean=0) and normalizes (std=1) all of the images.
