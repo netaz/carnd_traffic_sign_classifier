@@ -41,9 +41,9 @@ X_train, X_valid, y_train, y_valid = train_test_split(train['features'], train['
 ### Dataset summary, exploration and visualization
 I plotted the distribution of the training samples between the classes
 ![](training_distribution.png)
-It is evident that the classes do not have equal representation in the training dataset.  Because there are 43 classes, had the samples been distributed equally, we would have 2.33% (100/43) of the samples in each class.  However, in the actual dataset distribution, most classes comprise less than 2%.  Class 2 has the largest number of samples (5.78%), and classes 0 and 19 have the lowest representation (0.52% each).<br>
+It is evident that the classes do not have equal representation in the training dataset.  Because there are 43 classes, had the samples been distributed equally, we would have 2.33% (100/43) of the samples in each class.  However, in the actual dataset distribution, most classes comprise less than 2%.  Class 2 has the largest number of samples (5.78%), and classes 0 and 19 have the lowest representation (0.52% each).  I also plotted histogram of the percent-of-samples.  This graph provides another look at how the samples distribute between the classes and it also shows that most classes have a very low representation.<br>
 The validation dataset also doesn't distribute the samples between the classes in an equal manner:
-![](validation_distribution.png)
+![](dataset_distribution.png)
 It is also interesting to look at how well the validation dataset represents the training set.  In the following table and graph, a ratio close to 1 indicates that there about the same fraction of validation samples as training samples, in the specific class.
 A high ratio means that the class has a larger represnetation in the validation dataset.<br>
 Class 21 has a ratio of 1.75, which means that its size in the validation is almost twice its size in the training set.  Incidentaly, class 21 also has a low representation in the training dataset.  These two factors together, would make it likely that class 21 will have many errors in the validation testing.
