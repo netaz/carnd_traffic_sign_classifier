@@ -87,9 +87,20 @@ I tried two different augmentations: random rotation of angles chosen in the ran
 Finally, I apply the pre-processing on the newly augmented training dataset, and then plot 5 random images, for some sanity checks:<br>
 ![](sample_augmented_training.png)
 <br><br>
-I tried three different network models which I called netanet1, netanet2, and netanet3:<br>
+I tried three different network models which I called netanet1, netanet2, and netanet3.  All are very similar and are some variant of the LeNet architecture:<br>
 # HERE
 #INSERT
 #models tables
-I wrote three classes to aid in the training.  One class encapsulates the training configuration (TrainingConfig), another collects results (TrainingResults), and one performs the actual training (CnnTrainer).  I supplement this with some code to archive all of the training artificats.  I do this so that I can graph all of the results and compare them to one another.  I do this in a separate IPython notebook (results_comparison.ipynb).<br>
+Hyper-parameters which I considered included the learning-rate, the batch size, the number of epochs, and the network topology itself. Along the way I changed other "hyper-parameters" such as the types of the augmentations I need to apply, the classes I applied the augmentations, and the types of pre-processing.  That's quite a lot of tuning and I feel that I've got a long way to go before I understand the interactions between these hyper-parameters.  One of the first things I tried, was adding the pre-processing step which added approximately 2% of accuracy improvement.  Adding normalization to the preprocessing did wonders to the Loss behavior.  Instead of the Loss jerking around, it became much smoother.  The graphs below shows this:<br>
+Loss before normalization:
+![](loss_before_normalization.png)
+<br>
+Loss after normalization:
+![](loss_after_normalization.png)
+<br>
+I also slowly increased the number of epochs, since I understood that I needed to give the training process enough time to reach the minimum, or get out of a local minimum and continue searching for the global loss minimum.
+<br>
+Eventually, I had to finish this task and settle on some values for these hyper-parameters.  However, it became obvious along the way, that I need create some kind of light framework to capture the training process and results.  At minimum, I needed to collect and archive the results of each run, so that I'll be able to load them to a single graph and do some comparisons.<br>
+I wrote three classes to aid in the training.  One class encapsulates the training configuration (TrainingConfig), another collects results (TrainingResults), and one performs the actual training (CnnTrainer).  I supplement this with some code to archive all of the training artificats.  I do this so that I can graph all of the results and compare them to one another.  I placed this code in a separate IPython notebook because things were getting messy for me (results_comparison.ipynb).<br>
 # COMPARING THE MODELS (valid, training acc, loss, choosing hyper parameters)
+So what am I comparing?  Obviously, the goal is to maximize the validation accuracy.  
