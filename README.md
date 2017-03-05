@@ -87,10 +87,13 @@ I tried two different augmentations: random rotation of angles chosen in the ran
 Finally, I apply the pre-processing on the newly augmented training dataset, and then plot 5 random images, for some sanity checks:<br>
 ![](sample_augmented_training.png)
 <br><br>
-I tried three different network models which I called netanet1, netanet2, and netanet3.  All are very similar and are some variant of the LeNet architecture:<br>
+I tried four different network models which I named netanet1 thru netanet4.  All are very similar and are some variant of the LeNet architecture:<br>
 # HERE
 #INSERT
 #models tables
+<br>
+After trials and tribulations I settled on netanet4.  As I describe below, I ran training & validation runs and plotted the results against one another, but I don't show all of these runs.  Instead, the data below refers to netanet4 only.  I use three convolution layers which I made quite deep - all in an attempt to extract more features.  The last convolution layer uses a smaller 3x3 kernel as the IFMs were getting pretty small due to the two max-pool layers.  I only used 2 FC layers hoping that this would be enough to capture the interaction between the feature-maps.  A 50% dropout layer should prevent overfitting.
+<br>
 Hyper-parameters which I considered included the learning-rate, the batch size, the number of epochs, and the network topology itself. Along the way I changed other "hyper-parameters" such as the types of the augmentations I need to apply, the classes I applied the augmentations, and the types of pre-processing.  That's quite a lot of tuning and I feel that I've got a long way to go before I understand the interactions between these hyper-parameters.  One of the first things I tried, was adding the pre-processing step which added approximately 2% of accuracy improvement.  Adding normalization to the preprocessing did wonders to the Loss behavior.  Instead of the Loss jerking around, it became much smoother.  The graphs below shows this:<br>
 Loss before normalization:
 <br>
@@ -108,12 +111,22 @@ I wrote three classes to aid in the training.  One class encapsulates the traini
 So what am I comparing?  Obviously, the goal is to maximize the validation accuracy.  
 I also graphed the errors distribution between the classes, and something I call (maybe I heard it somewhere) the class confusion graph.  The confusion graph of a class, show what classes are predicted for a specific class.<br>
 [Anrdej Karpathy's Stanford CS231n notes](http://cs231n.github.io/neural-networks-3/#loss) provide some information on how to interpret the loss function behavior.  The shape of the Loss graph gives clues into tuning the learning rate and batch size (the batch size might be a little too low if the loss is too noisy).  Following Karpathy's advice I plot the Loss on both a linear and log scale and I found them both interesting.  The linear scale makes the "hockey stick" shape more pronounced which help determine if this shape is "healthy" (not too steep and not too gradual); while the log scale "magnifies" the details of the Loss function behavior as the Loss decreases, making comparisons between inference runs easier.<br>
+I wanted to use a decaying learning rate because it looked like after a certain amount of epochs, the Loss kind of bounces around in some small range.  I thought this might be due to the size of the learning rate.  From the TensorFlow documentation it appeared that  tf.contrib.layers.xavier_initializer is a good candidate for the decay function, but from reading around I understood that [tf.train.AdamOptimizer](https://www.tensorflow.org/api_docs/python/tf/train/AdamOptimizer) already takes care of learning rate decay.  According to Karpathy: "In practice Adam is currently recommended as the default algorithm to use" so I didn't want to change that.  I wanted to try out different values for 'epsilon' as recommended ("The default value of 1e-8 for epsilon might not be a good default in general"), but I didn't have enough time to do that.
+
+<br>
 Karpathy also provides insights into interpreting the validation vs. training accuracy graph, which is used to look for overfitting.<br>
 The graphs below display some of the statistics I collected, while training the networks and comparing them. <br> 
 # INSERT 
 # SUMMARY VALIDATION GRAPHS HERE
+<br>
+This graph shows the error distribution of one of the runs.  It shows for example, that class 24 has the highest error rate.  <br>
+![](errors_per_class.png)
+<br>
+Let's take a look at class 24's confusion graph and see what class is giving it problems:<br>
+![](class_24_errors.png)
 ### Use the model to make predictions on new images
-I collected 6 German traffic signs by cropping an [image](http://electronicimaging.spiedigitallibrary.org/data/journals/electim/927109/jei_22_4_041105_f010.png) I found on the Web.
+I collected 6 German traffic signs by cropping an [image](http://electronicimaging.spiedigitallibrary.org/data/journals/electim/927109/jei_22_4_041105_f010.png) I found on the Web and ran predictions and top-5 softmax results for them.<br>
+
 | Image         | Prediction    | Top5  |
 | ------------- |:-------------:| -----:|
 | ![](no_entry.jpg)      | Correct | $1600 |
@@ -122,3 +135,8 @@ I collected 6 German traffic signs by cropping an [image](http://electronicimagi
 | ![](children_crossing.jpg)      | Correct | $1600 |
 | ![](stop.jpg)      | Correct      |   $12 |
 | ![](no_truck_passing.jpg) | Correct     |    $1 |
+
+<br>
+I also used the test dataset I described at the top to make predictions.  Here's how it looks.<br>
+
+### INSERT GRAPH HERE
