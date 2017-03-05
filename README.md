@@ -91,4 +91,5 @@ I tried three different network models which I called netanet1, netanet2, and ne
 # HERE
 #INSERT
 #models tables
-I wrote three classes to aid in the training.  One class encapsulates the training configuration (TrainingConfig), another collects results (TrainingResults), and one performs the actual training (CnnTrainer).  I supplement this with some code to archive all of the training artificats.  I do this so that I can graph all of the results and compare them to one another.  I do this in a separate IPython notebook (results_comparison.ipynb).
+I wrote three classes to aid in the training.  One class encapsulates the training configuration (TrainingConfig), another collects results (TrainingResults), and one performs the actual training (CnnTrainer).  I supplement this with some code to archive all of the training artificats.  I do this so that I can graph all of the results and compare them to one another.  I do this in a separate IPython notebook (results_comparison.ipynb).<br>
+# COMPARING THE MODELS (valid, training acc, loss, choosing hyper parameters)
