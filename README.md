@@ -93,6 +93,7 @@ I tried three different network models which I called netanet1, netanet2, and ne
 #models tables
 Hyper-parameters which I considered included the learning-rate, the batch size, the number of epochs, and the network topology itself. Along the way I changed other "hyper-parameters" such as the types of the augmentations I need to apply, the classes I applied the augmentations, and the types of pre-processing.  That's quite a lot of tuning and I feel that I've got a long way to go before I understand the interactions between these hyper-parameters.  One of the first things I tried, was adding the pre-processing step which added approximately 2% of accuracy improvement.  Adding normalization to the preprocessing did wonders to the Loss behavior.  Instead of the Loss jerking around, it became much smoother.  The graphs below shows this:<br>
 Loss before normalization:
+<br>
 ![](loss_before_normalization.png)
 <br>
 Loss after normalization:
@@ -104,3 +105,6 @@ Eventually, I had to finish this task and settle on some values for these hyper-
 I wrote three classes to aid in the training.  One class encapsulates the training configuration (TrainingConfig), another collects results (TrainingResults), and one performs the actual training (CnnTrainer).  I supplement this with some code to archive all of the training artificats.  I do this so that I can graph all of the results and compare them to one another.  I placed this code in a separate IPython notebook because things were getting messy for me (results_comparison.ipynb).<br>
 # COMPARING THE MODELS (valid, training acc, loss, choosing hyper parameters)
 So what am I comparing?  Obviously, the goal is to maximize the validation accuracy.  
+I also graphed the errors distribution between the classes, and something I call (maybe I heard it somewhere) the class confusion graph.  The confusion graph of a class, show what classes are predicted for a specific class.<br>
+[Anrdej Karpathy's Stanford CS231n notes](http://cs231n.github.io/neural-networks-3/#loss) provide some information on how to interpret the loss function behavior.  The shape of the Loss graph gives clues into tuning the learning rate and batch size (the batch size might be a little too low if the loss is too noisy).  Following Karpathy's advice I plot the Loss on both a linear and log scale and I found them both interesting.  The linear scale makes the "hockey stick" shape more pronounced which help determine if this shape is "healthy" (not too steep and not too gradual); while the log scale "magnifies" the details of the Loss function behavior as the Loss decreases, making comparisons between inference runs easier.
+
