@@ -81,6 +81,14 @@ As a sanity check, I display the same 4 dark left-turn signs from the pre-proces
 ![](class_19_training_preprocessing_.png)
 <br>
 Before applying the image preprocessing, I need to augment the dataset.  I'm augmenting because I want to make the classes have a bit better representation distribution.  I'm augmenting a class by taking each image from that class in the dataset and add augmented copies of it.
-The augmentation is performed with scipy's ndimage library.  I only augment the classes that have "low" representation (1% or lower).  For classes with representation below 0.7% I apply extra augmentation (three times as much augmented images).  I could have chosen a more elaborate augmentation policy, and there's more experimenting that I can do, but will skip due to lack of time.  After the augmentation the distribution is much better:<br>
+The augmentation is performed with scipy's ndimage library.  I only augment the classes that have "low" representation (1% or lower).  For classes with representation below 0.7% I apply extra augmentation (three times as much augmented images).  I could have chosen a more elaborate augmentation policy, and there's more experimenting that I can do, but will skip due to lack of time.  After the augmentation the distribution is much better:<br><br>
 ![](augmented_training_distribution.png)
 I tried two different augmentations: random rotation of angles chosen in the range {-15, 15}, and random bluring levels.  I choose between the two randomly.
+Finally, I apply the pre-processing on the newly augmented training dataset, and then plot 5 random images, for some sanity checks:<br>
+![](sample_augmented_training.png)
+<br><br>
+I tried three different network models which I called netanet1, netanet2, and netanet3:<br>
+# HERE
+#INSERT
+#models tables
+I wrote three classes to aid in the training.  One class encapsulates the training configuration (TrainingConfig), another collects results (TrainingResults), and one performs the actual training (CnnTrainer).  I supplement this with some code to archive all of the training artificats.  I do this so that I can graph all of the results and compare them to one another.  I do this in a separate IPython notebook (results_comparison.ipynb).
