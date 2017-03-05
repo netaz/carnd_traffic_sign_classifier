@@ -97,14 +97,29 @@ Loss before normalization:
 ![](loss_before_normalization.png)
 <br>
 Loss after normalization:
+<br>
 ![](loss_after_normalization.png)
 <br>
 I also slowly increased the number of epochs, since I understood that I needed to give the training process enough time to reach the minimum, or get out of a local minimum and continue searching for the global loss minimum.
 <br>
 Eventually, I had to finish this task and settle on some values for these hyper-parameters.  However, it became obvious along the way, that I need create some kind of light framework to capture the training process and results.  At minimum, I needed to collect and archive the results of each run, so that I'll be able to load them to a single graph and do some comparisons.<br>
 I wrote three classes to aid in the training.  One class encapsulates the training configuration (TrainingConfig), another collects results (TrainingResults), and one performs the actual training (CnnTrainer).  I supplement this with some code to archive all of the training artificats.  I do this so that I can graph all of the results and compare them to one another.  I placed this code in a separate IPython notebook because things were getting messy for me (results_comparison.ipynb).<br>
-# COMPARING THE MODELS (valid, training acc, loss, choosing hyper parameters)
+#### Comparing the models
 So what am I comparing?  Obviously, the goal is to maximize the validation accuracy.  
 I also graphed the errors distribution between the classes, and something I call (maybe I heard it somewhere) the class confusion graph.  The confusion graph of a class, show what classes are predicted for a specific class.<br>
-[Anrdej Karpathy's Stanford CS231n notes](http://cs231n.github.io/neural-networks-3/#loss) provide some information on how to interpret the loss function behavior.  The shape of the Loss graph gives clues into tuning the learning rate and batch size (the batch size might be a little too low if the loss is too noisy).  Following Karpathy's advice I plot the Loss on both a linear and log scale and I found them both interesting.  The linear scale makes the "hockey stick" shape more pronounced which help determine if this shape is "healthy" (not too steep and not too gradual); while the log scale "magnifies" the details of the Loss function behavior as the Loss decreases, making comparisons between inference runs easier.
+[Anrdej Karpathy's Stanford CS231n notes](http://cs231n.github.io/neural-networks-3/#loss) provide some information on how to interpret the loss function behavior.  The shape of the Loss graph gives clues into tuning the learning rate and batch size (the batch size might be a little too low if the loss is too noisy).  Following Karpathy's advice I plot the Loss on both a linear and log scale and I found them both interesting.  The linear scale makes the "hockey stick" shape more pronounced which help determine if this shape is "healthy" (not too steep and not too gradual); while the log scale "magnifies" the details of the Loss function behavior as the Loss decreases, making comparisons between inference runs easier.<br>
+Karpathy also provides insights into interpreting the validation vs. training accuracy graph, which is used to look for overfitting.<br>
+The graphs below display some of the statistics I collected, while training the networks and comparing them. <br> 
+# INSERT 
+# SUMMARY VALIDATION GRAPHS HERE
+### Use the model to make predictions on new images
+I collected 6 German traffic signs by cropping an [image](http://electronicimaging.spiedigitallibrary.org/data/journals/electim/927109/jei_22_4_041105_f010.png) I found on the Web.
+| Image         | Prediction    | Cool  |
+| ------------- |:-------------:| -----:|
+| [no_entry.jpg]      | right-aligned | $1600 |
+| [right_turn.jpg]      | centered      |   $12 |
+| [20kmph.jpg] | are neat      |    $1 |
 
+| [children_crossing.jpg]      | right-aligned | $1600 |
+| [stop.jpg]      | centered      |   $12 |
+| [no_truck_passing.jpg] | are neat      |    $1 |
