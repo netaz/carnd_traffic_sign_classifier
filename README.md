@@ -114,12 +114,11 @@ The graphs below display some of the statistics I collected, while training the 
 # SUMMARY VALIDATION GRAPHS HERE
 ### Use the model to make predictions on new images
 I collected 6 German traffic signs by cropping an [image](http://electronicimaging.spiedigitallibrary.org/data/journals/electim/927109/jei_22_4_041105_f010.png) I found on the Web.
-| Image         | Prediction    | Cool  |
+| Image         | Prediction    | Top5  |
 | ------------- |:-------------:| -----:|
-| [no_entry.jpg]      | right-aligned | $1600 |
-| [right_turn.jpg]      | centered      |   $12 |
-| [20kmph.jpg] | are neat      |    $1 |
-
-| [children_crossing.jpg]      | right-aligned | $1600 |
-| [stop.jpg]      | centered      |   $12 |
-| [no_truck_passing.jpg] | are neat      |    $1 |
+| ![](no_entry.jpg)      | Correct | $1600 |
+| ![](right_turn.jpg)      | Correct      |   $12 |
+| ![](20kmph.jpg) | Correct      |    $1 |
+| ![](children_crossing.jpg)      | Correct | $1600 |
+| ![](stop.jpg)      | Correct      |   $12 |
+| ![](no_truck_passing.jpg) | Correct     |    $1 |
