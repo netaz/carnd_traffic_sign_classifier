@@ -88,9 +88,7 @@ Finally, I apply the pre-processing on the newly augmented training dataset, and
 ![](sample_augmented_training.png)
 <br><br>
 I tried four different network models which I named netanet1 thru netanet4.  All are very similar and are some variant of the LeNet architecture:<br>
-# HERE
-#INSERT
-#models tables
+![](network_models.png)
 <br>
 After trials and tribulations I settled on netanet4.  As I describe below, I ran training & validation runs and plotted the results against one another, but I don't show all of these runs.  Instead, the data below refers to netanet4 only.  I use three convolution layers which I made quite deep - all in an attempt to extract more features.  The last convolution layer uses a smaller 3x3 kernel as the IFMs were getting pretty small due to the two max-pool layers.  I only used 2 FC layers hoping that this would be enough to capture the interaction between the feature-maps.  A 50% dropout layer should prevent overfitting.
 <br>
