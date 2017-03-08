@@ -83,7 +83,7 @@ As a sanity check, I display the same 4 dark left-turn signs from the pre-proces
 Before applying the image preprocessing, I need to augment the dataset.  I'm augmenting because I want to make the classes have a bit better representation distribution.  I'm augmenting a class by taking each image from that class in the dataset and add augmented copies of it.
 The augmentation is performed with scipy's ndimage library.  I only augment the classes that have "low" representation (1% or lower).  For classes with representation below 0.7% I apply extra augmentation (three times as much augmented images).  I could have chosen a more elaborate augmentation policy, and there's more experimenting that I can do, but will skip due to lack of time.  After the augmentation the distribution is much better:<br><br>
 ![](augmented_training_distribution.png)
-I tried two different augmentations: random rotation of angles chosen in the range {-15, 15}, and random bluring levels.  I choose between the two randomly.
+I tried two different augmentations: random rotation of angles chosen in the range {-15, 15}, and random bluring levels.  I choose between the two randomly.  Later on, feeling that I needed more augmentation, I added random shifting (on x and y axes) and mixed rotation with shifting.  I didn't see much improvement, but I didn't do enough experimnetation.
 Finally, I apply the pre-processing on the newly augmented training dataset, and then plot 5 random images, for some sanity checks:<br>
 ![](sample_augmented_training.png)
 <br><br>
