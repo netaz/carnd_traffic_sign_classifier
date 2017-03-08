@@ -114,7 +114,7 @@ I wanted to use a decaying learning rate because it looked like after a certain 
 <br>
 Karpathy also provides insights into interpreting the validation vs. training accuracy graph, which is used to look for overfitting.<br>
 The graphs below display some of the statistics I collected, while training the networks and comparing them. <br> 
-![](loss_accuracy_saummary.png)
+![](loss_accuracy_summary.png)
 <br>
 This graph shows the error distribution of one of the runs.  It shows for example, that class 24 has the highest error rate.  <br>
 ![](errors_per_class.png)
