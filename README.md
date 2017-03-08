@@ -114,8 +114,7 @@ I wanted to use a decaying learning rate because it looked like after a certain 
 <br>
 Karpathy also provides insights into interpreting the validation vs. training accuracy graph, which is used to look for overfitting.<br>
 The graphs below display some of the statistics I collected, while training the networks and comparing them. <br> 
-# INSERT 
-# SUMMARY VALIDATION GRAPHS HERE
+![](loss_accuracy_saummary.png)
 <br>
 This graph shows the error distribution of one of the runs.  It shows for example, that class 24 has the highest error rate.  <br>
 ![](errors_per_class.png)
@@ -127,14 +126,13 @@ I collected 6 German traffic signs by cropping an [image](http://electronicimagi
 
 | Image         | Prediction    | Top5  |
 | ------------- |:-------------:| -----:|
-| ![](no_entry.jpg)      | Correct | $1600 |
-| ![](right_turn.jpg)      | Correct      |   $12 |
-| ![](20kmph.jpg) | Correct      |    $1 |
-| ![](children_crossing.jpg)      | Correct | $1600 |
-| ![](stop.jpg)      | Correct      |   $12 |
-| ![](no_truck_passing.jpg) | Correct     |    $1 |
+| ![](no_entry.jpg) 17     | Correct | 17 14 41  9 20 |
+| ![](right_turn.jpg) 33     | Correct      | 33 42 10  7 13 |
+| ![](20kmph.jpg) 0 | Incorrect      |  31 37 14 25 38 |
+| ![](children_crossing.jpg) 28     | Incorrect | 11 30 34 42 23 |
+| ![](stop.jpg)  14    | Correct      | 14 17 33  1 38 |
+| ![](no_truck_passing.jpg) 10 | Correct     | 10 42 41  0  1 |
 
 <br>
-I also used the test dataset I described at the top to make predictions.  Here's how it looks.<br>
-
-### INSERT GRAPH HERE
+I also used the test dataset I described at the top to make predictions.<br>
+Test dataset: 923 errors of 12630 samples (7.31%)
