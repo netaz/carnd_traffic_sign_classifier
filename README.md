@@ -123,17 +123,20 @@ Let's take a look at class 24's confusion graph and see what class is giving it 
 ![](class_24_errors.png)
 ### Use the model to make predictions on new images
 I collected 6 German traffic signs by cropping an [image](http://electronicimaging.spiedigitallibrary.org/data/journals/electim/927109/jei_22_4_041105_f010.png) I found on the Web and ran predictions and top-5 softmax results for them.<br>
-
-| Image         | Prediction    | Verification error| Top5  |
-| ------------- |:-------------:|:-----------------:|:-----:|
-| ![](no_entry.jpg) 17     | Correct | 1.7% | 17 14 41  9 20 |
-| ![](right_turn.jpg) 33     | Correct | 5.6% | 33 42 10  7 13 |
-| ![](20kmph.jpg) 0 | Incorrect      | 23.3% |  31 37 14 25 38 |
-| ![](children_crossing.jpg) 28     | Incorrect | 0.0% | 11 30 34 42 23 |
-| ![](stop.jpg)  14    | Correct      | 3.3% | 14 17 33  1 38 |
-| ![](no_truck_passing.jpg) 10 | Correct     | 0.0% | 10 42 41  0  1 |
+The images I chose are represented in the training set.  They are bright, clear and centered.  Class 0 (speed limit 20) is cropped at the edges, and that may throw off the prediction because I don't have such images in the training dataset.  When I plot the images in the training set next to the images I downloaded, they look similar enough.<br>
+Class 0 has a a very high error rate in the validation process (23.3%) so it has a high chance of being misclassified.  It has a high representation in the training dataset, but most of the images are augmentations, so they might have a high correlation - especially if the augmentations didn't change them enough.  Class 33 has the next highest error rate, and a low representation in the training set, so it might also be misclassified.
 <br>
-The images I chose are represented in the training set.  They are bright, clear and centered.  Class 0 (speed limit 20) is cropped at the edges, and that may throw off the prediction because I don't have such images in the training dataset.  
+I plotted a few of them, against their training images:<br>
+![](web_vs_training.png)
+<br>
+| Image         | Prediction    | Verification error| rep in training | Top5  |
+| ------------- |:-------------:|:-----------------:|:---------------:|:-----:|
+| ![](no_entry.jpg) 17               | Correct   | 1.7%  | 2.05% | 17 14 41  9 20 |
+| ![](right_turn.jpg) 33             | Correct   | 5.6%  | 1.24% | 33 42 10  7 13 |
+| ![](20kmph.jpg) 0                  | Incorrect | 23.3% | 2.23% | 31 37 14 25 38 |
+| ![](children_crossing.jpg) 28      | Incorrect | 0.0%  | 0.99% | 11 30 34 42 23 |
+| ![](stop.jpg)  14                  | Correct   | 3.3%  | 1.43% | 14 17 33  1 38 |
+| ![](no_truck_passing.jpg) 10       | Correct   | 0.0%  | 3.72% | 10 42 41  0  1 |
 <br>
 I also used the test dataset I described at the top to make predictions.<br>
 Test dataset: 923 errors of 12630 samples (7.31%)
