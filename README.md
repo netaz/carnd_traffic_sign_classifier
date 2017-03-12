@@ -129,14 +129,31 @@ Class 0 has a a very high error rate in the validation process (23.3%) so it has
 I plotted a few of them, against their training images:<br>
 ![](web_vs_training.png)
 <br>
-| Image         | Prediction    | Verification error| rep in training | Top5  |
-| ------------- |:-------------:|:-----------------:|:---------------:|:-----:|
-| ![](no_entry.jpg) 17               | Correct   | 1.7%  | 2.05% | 17 14 41  9 20 |
-| ![](right_turn.jpg) 33             | Correct   | 5.6%  | 1.24% | 33 42 10  7 13 |
-| ![](20kmph.jpg) 0                  | Incorrect | 23.3% | 2.23% | 31 37 14 25 38 |
-| ![](children_crossing.jpg) 28      | Incorrect | 0.0%  | 0.99% | 11 30 34 42 23 |
-| ![](stop.jpg)  14                  | Correct   | 3.3%  | 1.43% | 14 17 33  1 38 |
-| ![](no_truck_passing.jpg) 10       | Correct   | 0.0%  | 3.72% | 10 42 41  0  1 |
+
+| Image         | Verification error| rep in training |
+| ------------- |:-----------------:|:---------------:|
+| ![](no_entry.jpg) 17               |  1.7%  | 2.05% | 
+| ![](right_turn.jpg) 33             | 5.6%  | 1.24% | 
+| ![](20kmph.jpg) 0                  | 23.3% | 2.23% | 
+| ![](children_crossing.jpg) 28      | 0.0%  | 0.99% | 
+| ![](stop.jpg)  14                  | 3.3%  | 1.43% | 
+| ![](no_truck_passing.jpg) 10       | 0.0%  | 3.72% | 
+
+<br>
+
+
+| Image         | Prediction    | 1  |  2  | 3  | 4  |   5  |
+| ------------- |:-------------:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| ![](no_entry.jpg) 17               | Correct   | 17 (100%) | 14 | 41 | 9 | 20 |
+| ![](right_turn.jpg) 33             | Correct   | 33 (99.45%) | 42 (0.55%) | 10 | 7 | 13 |
+| ![](20kmph.jpg) 0                  | Incorrect | 31 (85.82%) | 37 (14.11%) | 14 | 25 | 38 |
+| ![](children_crossing.jpg) 28      | Incorrect | 11 (68.67%) | 30 (31.0%) | 34 | 42 | 23 |
+| ![](stop.jpg)  14                  | Correct   | 14 (99.1%) | 17 (0.8%) | 33 | 1 | 38 |
+| ![](no_truck_passing.jpg) 10       | Correct   | 10 (100%) | 42 | 41 | 0 | 1 |
+
+The model is very certain of its predictions for classes 17, 33, 14, and 10 - and indeed these are predicted correctly!<br>
+For the image from class 0, the model is leaning towards class 31 (85.82%) and 37 (14.11%).  This is strange: class 31 is "Wild animals crossing", and has a red triangle frame; and class 37 is "Go straight or left", and has a blue circle frame; while class 0 is "Speed limit (20km/h)", and has a red circle frame.  The network has failed to learn class 0 very well and this is also noticeable in the verifitcation error rate for this class (23%).<br>
+For class 28 ("Children crossing"), the model predicts class 11 ("Right-of-way at the next intersection", 68.67%) and class 30 ("Beware of ice/snow", 31.0%).  This confusion makes a lot of sense: all three classes have a dominant red traingle with a black "blob" in the middle.  In fact, it is this black blob which is what distinguishes the classes from one another - but it is small and blurry, making the prediction much harder.
 <br>
 I also used the test dataset I described at the top to make predictions.<br>
 Test dataset: 923 errors of 12630 samples (7.31%)
