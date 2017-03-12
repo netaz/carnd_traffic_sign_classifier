@@ -124,15 +124,16 @@ Let's take a look at class 24's confusion graph and see what class is giving it 
 ### Use the model to make predictions on new images
 I collected 6 German traffic signs by cropping an [image](http://electronicimaging.spiedigitallibrary.org/data/journals/electim/927109/jei_22_4_041105_f010.png) I found on the Web and ran predictions and top-5 softmax results for them.<br>
 
-| Image         | Prediction    | Top5  |
-| ------------- |:-------------:| -----:|
-| ![](no_entry.jpg) 17     | Correct | 17 14 41  9 20 |
-| ![](right_turn.jpg) 33     | Correct      | 33 42 10  7 13 |
-| ![](20kmph.jpg) 0 | Incorrect      |  31 37 14 25 38 |
-| ![](children_crossing.jpg) 28     | Incorrect | 11 30 34 42 23 |
-| ![](stop.jpg)  14    | Correct      | 14 17 33  1 38 |
-| ![](no_truck_passing.jpg) 10 | Correct     | 10 42 41  0  1 |
-
+| Image         | Prediction    | Verification error| Top5  |
+| ------------- |:-------------:|:-----------------:|:-----:|
+| ![](no_entry.jpg) 17     | Correct | 1.7% | 17 14 41  9 20 |
+| ![](right_turn.jpg) 33     | Correct | 5.6% | 33 42 10  7 13 |
+| ![](20kmph.jpg) 0 | Incorrect      | 23.3% |  31 37 14 25 38 |
+| ![](children_crossing.jpg) 28     | Incorrect | 0.0% | 11 30 34 42 23 |
+| ![](stop.jpg)  14    | Correct      | 3.3% | 14 17 33  1 38 |
+| ![](no_truck_passing.jpg) 10 | Correct     | 0.0% | 10 42 41  0  1 |
+<br>
+The images I chose are represented in the training set.  They are bright, clear and centered.  Class 0 (speed limit 20) is cropped at the edges, and that may throw off the prediction because I don't have such images in the training dataset.  
 <br>
 I also used the test dataset I described at the top to make predictions.<br>
 Test dataset: 923 errors of 12630 samples (7.31%)
