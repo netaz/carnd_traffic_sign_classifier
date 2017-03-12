@@ -153,7 +153,9 @@ I plotted a few of them, against their training images:<br>
 
 The model is very certain of its predictions for classes 17, 33, 14, and 10 - and indeed these are predicted correctly!<br>
 For the image from class 0, the model is leaning towards class 31 (85.82%) and 37 (14.11%).  This is strange: class 31 is "Wild animals crossing", and has a red triangle frame; and class 37 is "Go straight or left", and has a blue circle frame; while class 0 is "Speed limit (20km/h)", and has a red circle frame.  The network has failed to learn class 0 very well and this is also noticeable in the verifitcation error rate for this class (23%).<br>
-For class 28 ("Children crossing"), the model predicts class 11 ("Right-of-way at the next intersection", 68.67%) and class 30 ("Beware of ice/snow", 31.0%).  This confusion makes a lot of sense: all three classes have a dominant red traingle with a black "blob" in the middle.  In fact, it is this black blob which is what distinguishes the classes from one another - but it is small and blurry, making the prediction much harder.
-<br>
-I also used the test dataset I described at the top to make predictions.<br>
+For class 28 ("Children crossing"), the model predicts class 11 ("Right-of-way at the next intersection", 68.67%) and class 30 ("Beware of ice/snow", 31.0%).  This confusion makes a lot of sense: all three classes have a dominant red traingle with a black "blob" in the middle.  In fact, it is this black blob which is what distinguishes the classes from one another - but it is small and blurry, making the prediction much harder.  The network performs max-pooling right after the first convolution, and this subsampling process even further "compresses" the receptive field.<br>
+Over all, the model predicted correctly 4/6 of the images, or 67%.  Well below the expected 95-96% correct prediction rate.
+So am I overfitting?  I don't think we can tell, by looking at just 6 test images.  I also used the test dataset I described at the top to make predictions:<br>
 Test dataset: 923 errors of 12630 samples (7.31%)
+<br>
+Looking at the results of testing a much larger test dataset, the error rate goes down to 7.3%.  This is a lot closer to the error rate I've got on the verification dataset - the model might be overfitting by a small amount.  More images might help generalize.   
